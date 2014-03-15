@@ -1,1 +1,30 @@
-apply plugin: 'java'
+apply plugin: 'maven'
+
+
+dependencies {
+    runtime fileTree(dir: 'lib', includes: ['*.jar'])
+    compile gradleApi()
+    compile localGroovy()
+    compile('org.opencms:opencms-core:9.0.0') {
+        exclude group: 'org.slf4j'
+    }
+}
+
+configurations { mavenHttp }
+
+archivesBaseName = 'opencmsplugin'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            setUniqueVersion(false)
+            mavenLocal()
+            repository(url: 'https://artifactory.codecentric.de/artifactory/internal') {
+                authentication(userName: userName, password: password)
+            }
+            snapshotRepository(url: 'https://artifactory.codecentric.de/artifactory/snapshots') {
+                authentication(userName: userName, password: password)
+            }
+        }
+    }
+}

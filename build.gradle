@@ -1,6 +1,8 @@
 allprojects {
     apply plugin: 'java'
+    apply plugin:'groovy'
     apply plugin: 'idea'
+    apply plugin: 'eclipse'
 
     group 'de.codecentric.gradle'
     version = '0.0.1-SNAPSHOT'
