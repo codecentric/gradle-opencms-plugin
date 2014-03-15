@@ -1,25 +1,28 @@
-apply plugin: 'java'
-apply plugin: 'idea'
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
-compileJava.options.debugOptions.debugLevel = "source,lines,vars"
-version = '0.0.1-SNAPSHOT'
+    group 'de.codecentric.gradle'
+    version = '0.0.1-SNAPSHOT'
 
-repositories {
-    mavenLocal()
-    mavenCentral()
-}
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+    compileJava.options.debugOptions.debugLevel = "source,lines,vars"
 
-dependencies {
-    testCompile 'junit:junit:4.11'
-    testCompile 'com.cyrusinnovation:mockito-groovy-support:1.3'
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
 
-}
+    dependencies {
+        testCompile 'junit:junit:4.11'
+        testCompile 'com.cyrusinnovation:mockito-groovy-support:1.3'
+    }
 
-idea {
-    project {
-        jdkName = '1.7'
-        languageLevel = '1.7'
+    idea {
+        project {
+            jdkName = '1.7'
+            languageLevel = '1.7'
+        }
     }
 }
