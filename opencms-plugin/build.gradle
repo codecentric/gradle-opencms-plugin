@@ -1,6 +1,5 @@
 apply plugin: 'maven'
 
-
 dependencies {
     runtime fileTree(dir: 'lib', includes: ['*.jar'])
     compile gradleApi()

@@ -1,0 +1,3 @@
+loginUser opencms.user opencms.password
+importModule "opencms.module.pfad"
+exit

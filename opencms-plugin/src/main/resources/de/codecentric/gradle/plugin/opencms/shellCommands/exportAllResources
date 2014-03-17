@@ -1,0 +1,5 @@
+loginUser opencms.user opencms.password
+setSiteRoot "opencms.site.root"
+setCurrentProject "opencms.project"
+exportAllResources "opencms.export.datei"
+exit
