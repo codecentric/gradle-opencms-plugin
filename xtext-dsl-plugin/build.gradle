@@ -1,10 +1,9 @@
 apply plugin: 'maven'
 
 version='0.0.1-SNAPSHOT'
+archivesBaseName = 'xtext-dsl-plugin'
 
 configurations { mavenHttp }
-
-archivesBaseName = 'xtext-dsl-plugin'
 
 uploadArchives {
     repositories {
