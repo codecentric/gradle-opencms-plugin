@@ -4,6 +4,9 @@
 **.iws
 **.iml
 .DS_Store
-build
+**/target
+**/out
+**/bin
+**/build
 **/gradle.properties
 .svn
