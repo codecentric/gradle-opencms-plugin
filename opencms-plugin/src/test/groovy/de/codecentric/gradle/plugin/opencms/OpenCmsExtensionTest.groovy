@@ -1,7 +1,5 @@
 package de.codecentric.gradle.plugin.opencms
 
-import de.codecentric.gradle.plugin.opencms.OpenCmsExtension
-import de.codecentric.gradle.plugin.opencms.OpenCmsModule
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -14,12 +12,13 @@ import static org.mockito.MockitoAnnotations.initMocks
 public class OpenCmsExtensionTest { 
     OpenCmsExtension extension
     @Mock
-    OpenCmsModule module
+    OpenCmsModuleDeployment module
     
 	@Before
 	public void setUp() { 
         initMocks(this)
-        extension = new OpenCmsExtension( module )
+        extension = new OpenCmsExtension( "", "", "" )
+        extension.module = module
 	}
 
     @Test

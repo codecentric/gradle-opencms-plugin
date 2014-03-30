@@ -27,7 +27,7 @@ class ExtractModuleManifestTask extends AbstractShellRunnerTask {
     def WorkResult copyManifestXmlIntoDevProject() {
         project.copy {
             from new File("${tempDir}/export/manifest.xml")
-            into project.file("dev/xml/opencms")
+            into project.projectDir
         }
     }
 

@@ -3,52 +3,63 @@ package de.codecentric.gradle.plugin.opencms
 import org.opencms.configuration.CmsConfigurationException
 import org.opencms.lock.CmsLockException
 import org.opencms.security.CmsRoleViolationException
-
 /**
  * Public method signatures are registered with Gradle
  * to extend the build DSL.
  */
 class OpenCmsExtension {
-    OpenCmsModule module
+    OpenCmsModuleDeployment module
+    private String openCmsDir
+    private String user
+    private String password
 
-    OpenCmsExtension(OpenCmsModule module) {
-        this.module = module;
+    OpenCmsExtension(String openCmsDir, String user, String password) {
+
+        this.password = password
+        this.user = user
+        this.openCmsDir = openCmsDir
     }
 
     def String getModuleName(final String fileName) {
-        module.getModuleName(fileName)
+        getModule().getModuleName(fileName)
     }
 
     def importModule(final String filename) throws Exception {
-        module.importModule(filename)
+        getModule().importModule(filename)
     }
 
     def updateModule(final String filename) throws Exception {
-        module.updateModule(filename)
+        getModule().updateModule(filename)
     }
 
     def deleteModule(final String filename)
             throws CmsRoleViolationException, CmsLockException, CmsConfigurationException {
-        module.deleteModule(filename)
+        getModule().deleteModule(filename)
     }
 
     def runScript( FileInputStream s ) {
-        module.runScript( s );
+        getModule().runScript( s );
     }
 
     def void synchronize(final String vfsPath, final String localPath) throws Exception {
-        module.synchronize( vfsPath, localPath )
+        getModule().synchronize( vfsPath, localPath )
     }
 
     def publishProjectAndWait() throws Exception {
-        module.publishProjectAndWait()
+        getModule().publishProjectAndWait()
     }
 
     def clearCache() throws Exception {
-        module.clearCache()
+        getModule().clearCache()
     }
 
     def finish() {
-        module.finish()
+        getModule().finish()
+    }
+
+    def getModule() {
+        if ( module == null)
+           module = new OpenCmsModuleDeployment( openCmsDir, user, password);
+        return module;
     }
 }

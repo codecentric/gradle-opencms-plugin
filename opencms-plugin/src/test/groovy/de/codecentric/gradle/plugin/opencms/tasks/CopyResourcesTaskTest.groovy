@@ -1,8 +1,7 @@
 package de.codecentric.gradle.plugin.opencms.tasks
 import de.codecentric.gradle.plugin.opencms.OpenCmsExtension
-import de.codecentric.gradle.plugin.opencms.OpenCmsModule
+import de.codecentric.gradle.plugin.opencms.OpenCmsModuleDeployment
 import org.gradle.api.Project
-import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.After
 import org.junit.Before
@@ -16,7 +15,7 @@ import static org.mockito.MockitoAnnotations.initMocks
 public class CopyResourcesTaskTest {
     Project project
     @Mock
-    OpenCmsModule module
+    OpenCmsModuleDeployment module
 
     FileSystemHelper helper
     File tempDir

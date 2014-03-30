@@ -19,7 +19,7 @@ class OpenCmsPluginTest {
     @Mock
     ExtensionContainer container
     @Mock
-    OpenCmsModule module
+    OpenCmsModuleDeployment module
 
     @Before
     def void setUp() {

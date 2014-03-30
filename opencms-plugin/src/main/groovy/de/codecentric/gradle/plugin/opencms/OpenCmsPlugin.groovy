@@ -1,5 +1,6 @@
 package de.codecentric.gradle.plugin.opencms
 
+import de.codecentric.gradle.plugin.opencms.tasks.CmsModuleTask
 import de.codecentric.gradle.plugin.opencms.tasks.CopyResourcesTask
 import de.codecentric.gradle.plugin.opencms.tasks.ExtractModuleManifestTask
 import de.codecentric.gradle.plugin.opencms.tasks.SynchronizeTask
@@ -17,7 +18,7 @@ import java.text.SimpleDateFormat
 class OpenCmsPlugin implements Plugin<Project> {
     final Logger log = LoggerFactory.getLogger(OpenCmsPlugin.class)
     Project project
-    OpenCmsModule module
+    OpenCmsModuleDeployment module
     OpenCmsShellScript shellRunner
 
     String openCmsDir
@@ -116,7 +117,11 @@ class OpenCmsPlugin implements Plugin<Project> {
             from project.buildModuleZip.archivePath
         }
 
-
+        project.task('cmsModule', type:CmsModuleTask) {
+            description = "Create the basic folder layout of an OpenCms Module"
+            dir project.projectDir
+            moduleName project.opencms_module_name
+        }
     }
 
     def initializeOpenCmsExtension(Project project) {
@@ -127,13 +132,7 @@ class OpenCmsPlugin implements Plugin<Project> {
         openCmsModuleName = project.opencms_module_name
         openCmsModuleShortName = project.opencms_module_shortname
         version = project.version
-        project.extensions.create('opencms', OpenCmsExtension, getOpenCmsModule())
-    }
-
-    def synchronized getOpenCmsModule() {
-        if (module == null)
-            module = new OpenCmsModule(openCmsDir + "/WEB-INF", user, password)
-        return module;
+        project.extensions.create('opencms', OpenCmsExtension, openCmsDir + "/WEB-INF", user, password)
     }
 
     def initializeOpenCmsShellRunner() {

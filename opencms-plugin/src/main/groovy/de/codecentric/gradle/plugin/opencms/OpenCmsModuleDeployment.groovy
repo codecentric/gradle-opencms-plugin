@@ -12,11 +12,14 @@ import org.slf4j.LoggerFactory
  * Encapsulates an OpenCms shell and acts as a delegate to a running OpenCms instance.
  *
  */
-class OpenCmsModule {
+class OpenCmsModuleDeployment {
     private static final String ZIP_EXTENSION = ".zip";
 
     OpenCmsShell shell
-    Logger log = LoggerFactory.getLogger(OpenCmsModule.class)
+    Logger log = LoggerFactory.getLogger(OpenCmsModuleDeployment.class)
+    String username
+    String password
+    boolean loggedIn
 
     /** Create a new module handler
      *
@@ -24,7 +27,7 @@ class OpenCmsModule {
      * @param user Name of user to login with
      * @param password Password of user to login with
      */
-    OpenCmsModule(final String basePath, final String user, final String password) {
+    OpenCmsModuleDeployment(final String basePath, final String user, final String password) {
         initialize(basePath, user, password);
     }
 
@@ -34,7 +37,7 @@ class OpenCmsModule {
      * @param user Name of user to login with
      * @param password Password of user to login with
      */
-    OpenCmsModule(final String basePath, final String user, final String password, final OpenCmsShell shell) {
+    OpenCmsModuleDeployment(final String basePath, final String user, final String password, final OpenCmsShell shell) {
         this.shell = shell
         initialize(basePath, user, password)
     }
@@ -63,6 +66,7 @@ class OpenCmsModule {
      */
     def importModule(final String filename) throws Exception {
         log.info("Importing module: '" + filename + "'");
+        login()
         shell.replaceModule(getModuleName(filename), filename);
     }
 
@@ -77,6 +81,7 @@ class OpenCmsModule {
      */
     def updateModule(final String filename) throws Exception {
         log.info("Updating module: '" + filename + "'");
+        login()
         shell.replaceModule(getModuleName(filename), filename);
     }
 
@@ -89,9 +94,8 @@ class OpenCmsModule {
     def deleteModule(final String filename) throws CmsRoleViolationException, CmsLockException,
             CmsConfigurationException {
         log.info("Deleting module: '" + filename + "'");
-
+        login()
         def moduleName = getModuleName(filename)
-
         shell.deleteModule(moduleName);
     }
 
@@ -104,6 +108,7 @@ class OpenCmsModule {
      */
     def switchProject( final String cmsProjectName ) throws Exception {
         log.info("Switching active project to: '" + cmsProjectName + "'");
+        login()
         shell.switchProject( cmsProjectName )
     }
 
@@ -113,7 +118,8 @@ class OpenCmsModule {
      * @throws Exception if something goes wrong
      */
     def publishProjectAndWait() throws Exception {
-        shell.publishProject();
+        login()
+        shell.publishProject()
     }
 
     /**
@@ -125,7 +131,8 @@ class OpenCmsModule {
      */
     @SuppressWarnings("unchecked")
     def clearCache() throws Exception {
-        shell.purgeJspRepository();
+        login()
+        shell.purgeJspRepository()
     }
 
     /** Initializes the OpenCMS-runtime and login with a specified user
@@ -137,15 +144,19 @@ class OpenCmsModule {
      */
     private void initialize(final String basePath, final String username, final String password)
             throws CmsException, IOException {
+        this.password = password
+        this.username = username
+
         if( !shell)
             shell = new OpenCmsShell(basePath);
-        shell.login(username, password);
     }
+
     /**
      * Runs a custom OpenCms shell script
      * @param inputStream
      */
     def runScript(final FileInputStream inputStream) {
+        login()
         shell.start( inputStream );
     }
 
@@ -156,12 +167,21 @@ class OpenCmsModule {
      * @throws Exception If anything goes wrong.
      */
     def void synchronize(final String vfsPath, final String localPath) throws Exception {
+        login()
         shell.synchronize( vfsPath, localPath )
     }
         /** Close connection
      *
      */
     def finish() {
+        login();
         shell.exit();
+    }
+
+    def login() {
+        if( !loggedIn ) {
+            shell.login(username, password);
+            loggedIn = true;
+        }
     }
 }

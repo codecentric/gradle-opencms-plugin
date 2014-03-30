@@ -1,6 +1,5 @@
 package de.codecentric.gradle.plugin.opencms
 
-import de.codecentric.gradle.plugin.opencms.OpenCmsModule
 import de.codecentric.gradle.plugin.opencms.shell.OpenCmsShell
 import org.junit.After
 import org.junit.Before
@@ -10,7 +9,7 @@ import static org.junit.Assert.assertEquals
 import static org.mockito.Mockito.mock
 import static org.mockito.Mockito.verify
 
-public class OpenCmsModuleTest {
+public class OpenCmsModuleDeploymentTest {
     def module
 
     OpenCmsShell shell
@@ -18,7 +17,7 @@ public class OpenCmsModuleTest {
     @Before
 	def void setUp() {
         shell = mock( OpenCmsShell)
-        module = new OpenCmsModule( ".", "user", "pass", shell)
+        module = new OpenCmsModuleDeployment( ".", "user", "pass", shell)
    }
 
  @Test
