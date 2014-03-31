@@ -1,19 +1,22 @@
 package de.codecentric.gradle.plugin.opencms.tasks
+
+import de.codecentric.gradle.plugin.opencms.OpenCmsModel
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
 class CmsModuleTask extends DefaultTask {
     File dir
-    String moduleName
+    OpenCmsModel cms
+
 
     @TaskAction
     def void setUp() {
-         if( dir != null && dir.directory && dir.exists() ) {
-             createSourceDirectories()
-             createTestDirectories()
-             createVfsDirectories()
-             createConfigFiles()
-         }
+        if (dir != null && dir.directory && dir.exists()) {
+            createSourceDirectories()
+            createTestDirectories()
+            createVfsDirectories()
+            createConfigFiles()
+        }
     }
 
     void createSourceDirectories() {
@@ -46,9 +49,8 @@ class CmsModuleTask extends DefaultTask {
     }
 
     void createConfigFiles() {
-        touch("/src/vfs/project.meta.json")
         touch("/src/vfs/module.config")
-        touch("/src/vfs/system/${moduleName}.tld")
+        touch("/src/vfs/system/${cms.modules.get(0).name}.tld")
     }
 
     def touch(final String path) {
