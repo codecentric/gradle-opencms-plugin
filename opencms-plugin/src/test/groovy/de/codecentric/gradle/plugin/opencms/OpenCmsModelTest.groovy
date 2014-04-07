@@ -54,6 +54,8 @@ public class OpenCmsModelTest {
             author = "Codecentric AG"
             email = "opencms@codecentric.de"
             version = "0.0.1"
+            resource(uri: "/")
+            exportpoint(uri: "lib/", destination: "WEB-INF/lib")
         }
 
         assertEquals(1, model.modules.size())
@@ -66,6 +68,8 @@ public class OpenCmsModelTest {
         assertEquals("Codecentric AG", module.author)
         assertEquals("opencms@codecentric.de", module.email)
         assertEquals("0.0.1", module.version)
+        assertEquals(1, module.exportpoints.size())
+        assertEquals(1, module.resources.size())
     }
 
     @After

@@ -4,7 +4,7 @@ import org.gradle.api.Project
 
 
 class OpenCmsModule {
-    OpenCmsModel openCmsModel
+    OpenCmsModel cms
     Project project
 
     String name = ""
@@ -16,11 +16,12 @@ class OpenCmsModule {
     String version = ""
 
     List<OpenCmsFeature> features
-
+    def resources = []
+    def exportpoints = []
 
     def OpenCmsModule(OpenCmsModel openCmsModel, Project project) {
         this.project = project
-        this.openCmsModel = openCmsModel
+        this.cms = openCmsModel
         features = new ArrayList<>()
     }
 
@@ -30,5 +31,13 @@ class OpenCmsModule {
         closure.delegate = feature
         closure.resolveStrategy = Closure.DELEGATE_FIRST
         closure()
+    }
+
+    def resource(map) {
+        resources += [uri: "/system/modules/${name}/${map.uri}"]
+    }
+
+    def exportpoint(map) {
+        exportpoints += [uri: "/system/modules/${name}/${map.uri}", destination: map.destination]
     }
 }

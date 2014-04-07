@@ -11,6 +11,7 @@ class OpenCmsModel {
     String username = "Admin"
     String password = "admin"
     String cmsProject = "Offline"
+    String cmsVersion = "9.0.1"
 
     OpenCmsModel(Project project) {
         this.project = project

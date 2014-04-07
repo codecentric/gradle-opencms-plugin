@@ -1,61 +1,31 @@
 package de.codecentric.gradle.plugin.opencms.tasks
 
 import de.codecentric.gradle.plugin.opencms.OpenCmsModel
-import org.gradle.api.DefaultTask
-import org.gradle.api.tasks.TaskAction
+import org.gradle.api.InvalidUserDataException
+import org.gradle.api.internal.file.FileResolver
+import org.gradle.api.internal.file.copy.CopyAction
+import org.gradle.api.internal.file.copy.FileCopyAction
+import org.gradle.api.tasks.Copy
 
-class CmsModuleTask extends DefaultTask {
-    File dir
+class CmsModuleTask extends Copy {
     OpenCmsModel cms
 
-
-    @TaskAction
-    def void setUp() {
-        if (dir != null && dir.directory && dir.exists()) {
-            createSourceDirectories()
-            createTestDirectories()
-            createVfsDirectories()
-            createConfigFiles()
+    @Override
+    protected CopyAction createCopyAction() {
+        if (cms == null)
+            throw new InvalidUserDataException("OpenCms was not configured correctly.");
+        File destinationDir = getDestinationDir()
+        if (destinationDir == null) {
+            throw new InvalidUserDataException("No copy destination directory has been specified, use 'into' to specify a target directory.");
         }
+        File moduleBaseDir = initModuleBaseDir(destinationDir)
+        return new FileCopyAction(getServices().get(FileResolver.class).withBaseDir(moduleBaseDir))
     }
 
-    void createSourceDirectories() {
-        mkdir("/src")
-        mkdir("/src/main")
-        mkdir("/src/main/java")
-        mkdir("/src/main/resources")
-    }
-
-    void createTestDirectories() {
-        mkdir("/src/test");
-        mkdir("/src/test/java")
-        mkdir("/src/test/resources")
-    }
-
-    void createVfsDirectories() {
-        mkdir("/src/vfs")
-        mkdir("/src/vfs/elements")
-        mkdir("/src/vfs/formatters")
-        mkdir("/src/vfs/resources")
-        mkdir("/src/vfs/schemas")
-        mkdir("/src/vfs/system")
-        mkdir("/src/vfs/templates")
-    }
-
-    def void mkdir(final String path) {
-        File newDir = project.file("${dir.absolutePath}${path}");
-        if (!newDir.exists())
-            newDir.mkdir()
-    }
-
-    void createConfigFiles() {
-        touch("/src/vfs/module.config")
-        touch("/src/vfs/system/${cms.modules.get(0).name}.tld")
-    }
-
-    def touch(final String path) {
-        File newDir = project.file("${dir.absolutePath}${path}");
-        if (!newDir.exists())
-            newDir.createNewFile()
+    File initModuleBaseDir(File destinationDir) {
+        File baseDir = project.file(destinationDir.absolutePath)
+        if (!baseDir.exists())
+            baseDir.mkdirs()
+        return baseDir
     }
 }
