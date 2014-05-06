@@ -6,7 +6,7 @@ import org.gradle.api.Project
 class OpenCmsFormatterJsp extends OpenCmsVfsFile {
 
     OpenCmsFormatterJsp(OpenCmsFeature feature, Project project, File dir) {
-        this.feature = feature
+        this.resourceType = feature
         this.rootPath = "${dir.absolutePath}/src/vfs/system/modules/${feature.module.name}"
         createFile(project, dir, feature)
         meta = project.file("${rootPath}/formatters/${feature.name}.jsp.meta.xml")
@@ -34,4 +34,13 @@ class OpenCmsFormatterJsp extends OpenCmsVfsFile {
                 '</cms:formatter>\n';
     }
 
+    @Override
+    def addProperties() {
+        builder.properties() {
+            property(type: "shared") {
+                name('export')
+                value() { cdata("false") }
+            }
+        }
+    }
 }

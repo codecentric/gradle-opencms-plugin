@@ -1,9 +1,6 @@
 package de.codecentric.gradle.plugin.opencms
 
-import de.codecentric.gradle.plugin.opencms.tasks.CmsDeployTask
-import de.codecentric.gradle.plugin.opencms.tasks.CmsManifestTask
-import de.codecentric.gradle.plugin.opencms.tasks.CmsModuleTask
-import de.codecentric.gradle.plugin.opencms.tasks.CmsScaffoldTask
+import de.codecentric.gradle.plugin.opencms.tasks.*
 import groovy.util.logging.Slf4j
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -32,12 +29,6 @@ class OpenCmsPlugin implements Plugin<Project> {
             cms openCms
         }
 
-        project.task('cms_manifest', type: CmsManifestTask, dependsOn: 'cms_module') {
-            description = "Creates the module's manifest.xml configuration file from the contents of the vfs folder."
-            dir project.projectDir
-            cms openCms
-        }
-
         project.task('cms_module', type: CmsModuleTask) {
             description = "Creates the deployment module directory from the contents of the vfs folder."
             from "${project.projectDir}/src/vfs"
@@ -49,10 +40,21 @@ class OpenCmsPlugin implements Plugin<Project> {
             }
         }
 
+        project.task('cms_jar', type: CmsJarTask, dependsOn: 'cms_module') {
+            from project.sourceSets.main.output
+            cms openCms
+        }
+
+        project.task('cms_manifest', type: CmsManifestTask, dependsOn: 'cms_jar') {
+            description = "Creates the module's manifest.xml configuration file from the contents of the vfs folder."
+            dir project.projectDir
+            cms openCms
+        }
+
         project.task('cms_deploy', type: CmsDeployTask, dependsOn: 'cms_manifest') {
-            from project.file("${project.projectDir}/build/opencms-cmsmodule")
-            include "system/**/*", "manifest.xml"
-            exclude "**/.DS_Store"
+            from("${project.projectDir}/build/opencms-cmsmodule") {
+                exclude "**/.DS_Store"
+            }
             cms openCms
         }
     }

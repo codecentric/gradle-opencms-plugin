@@ -27,6 +27,15 @@ public class OpenCmsModuleTest {
         assertEquals("something", module.features.get(0).name)
     }
 
+    @Test
+    public void shouldConfigureResourceTypeFromClosure() {
+        module.resourcetype {
+            name = "something"
+        }
+        assertEquals(1, module.resourceTypes.size())
+        assertEquals("something", module.resourceTypes.get(0).name)
+    }
+
     @After
     public void tearDown() {
         module = null

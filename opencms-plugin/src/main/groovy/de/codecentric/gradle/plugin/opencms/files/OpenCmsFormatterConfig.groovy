@@ -8,7 +8,7 @@ class OpenCmsFormatterConfig extends OpenCmsVfsFile {
     OpenCmsFormatterConfig(OpenCmsFeature feature, Project project, File dir) {
         builder.doubleQuotes = true
         this.project = project
-        this.feature = feature
+        this.resourceType = feature
         this.rootPath = "${dir.absolutePath}/src/vfs/system/modules/${feature.module.name}"
 
         createFile(project, dir, feature)
@@ -32,15 +32,19 @@ class OpenCmsFormatterConfig extends OpenCmsVfsFile {
                         '.config/schemas/formatters/new_formatter.xsd') {
             ['en', 'de'].each() { lang ->
                 NewFormatter(language: lang) {
-                    NiceName() { cdata(feature.nicename) }
-                    Type() { cdata(feature.type) }
+                    NiceName() { cdata(resourceType.nicename) }
+                    Type() { cdata(resourceType.type) }
                     Jsp() {
                         link(type: "WEAK") {
-                            target() { cdata("/system/modules/${feature.module.name}/formatters/${feature.name}.jsp") }
+                            target() {
+                                cdata("/system/modules/${resourceType.module.name}/formatters/${resourceType.name}.jsp")
+                            }
                             uuid(UUID.randomUUID())
                         }
                     }
-                    Rank() { cdata(String.valueOf(featureIndex() + 1000)) }
+                    Rank() {
+                        cdata(String.valueOf(featureIndex() + resourceType.module.cms.explorerOffset.toInteger()))
+                    }
                     Match() {
                         Types() {
                             ContainerType() { cdata('content') }
@@ -56,12 +60,22 @@ class OpenCmsFormatterConfig extends OpenCmsVfsFile {
     }
 
     def int featureIndex() {
-        feature.module.features.indexOf(feature)
+        resourceType.module.features.indexOf(resourceType)
     }
 
     def writeConfig() {
         file.parentFile.mkdirs()
         file.createNewFile()
         file.text = '<?xml version="1.0" encoding="utf-8" ?>\n' + stringWriter.toString();
+    }
+
+    @Override
+    def addProperties() {
+        builder.properties() {
+            property() {
+                name('Title')
+                value() { cdata("${resourceType.nicename}") }
+            }
+        }
     }
 }

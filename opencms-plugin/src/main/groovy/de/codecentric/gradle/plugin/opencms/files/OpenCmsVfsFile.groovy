@@ -1,9 +1,8 @@
 package de.codecentric.gradle.plugin.opencms.files
 
-import de.codecentric.gradle.plugin.opencms.OpenCmsFeature
+import de.codecentric.gradle.plugin.opencms.OpenCmsResourceType
 import groovy.xml.MarkupBuilder
 import org.gradle.api.Project
-
 
 class OpenCmsVfsFile {
     StringWriter stringWriter = new StringWriter()
@@ -13,7 +12,7 @@ class OpenCmsVfsFile {
     File meta
     Project project
     String type
-    OpenCmsFeature feature
+    OpenCmsResourceType resourceType
     Date date = new Date()
     String path
     String rootPath
@@ -23,7 +22,7 @@ class OpenCmsVfsFile {
         this.type = type
         builder.doubleQuotes = true
         if (!meta.exists()) {
-            prepareMetadata(feature.module.cms.username)
+            prepareMetadata(resourceType.module.cms.username)
             writeMetadata()
             clearStringWriter()
         }
@@ -54,24 +53,14 @@ class OpenCmsVfsFile {
             datecreated(now())
             usercreated(user)
             flags('0')
-            if (feature != null && type == "formatter_config") {
-                properties() {
-                    property() {
-                        name('Title')
-                        value() { cdata("${feature.nicename}") }
-                    }
-                }
-            } else if (feature != null && type == "jsp") {
-                properties() {
-                    property(type: "shared") {
-                        name('export')
-                        value() { cdata("false") }
-                    }
-                }
-            } else properties()
+            addProperties()
             relations()
             accesscontrol()
         }
+    }
+
+    def addProperties() {
+        builder.properties()
     }
 
     def cdata(String string) {

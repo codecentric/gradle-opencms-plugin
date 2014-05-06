@@ -12,6 +12,9 @@ class OpenCmsModel {
     String password = "admin"
     String cmsProject = "Offline"
     String cmsVersion = "9.0.1"
+    String explorerOffset = "5000";
+    String adeOffset = "100"
+    String widgetOffset = "200"
 
     OpenCmsModel(Project project) {
         this.project = project

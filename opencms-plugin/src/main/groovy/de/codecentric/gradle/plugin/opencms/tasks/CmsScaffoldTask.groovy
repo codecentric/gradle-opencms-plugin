@@ -3,6 +3,7 @@ package de.codecentric.gradle.plugin.opencms.tasks
 import de.codecentric.gradle.plugin.opencms.OpenCmsFeature
 import de.codecentric.gradle.plugin.opencms.OpenCmsModel
 import de.codecentric.gradle.plugin.opencms.OpenCmsModule
+import de.codecentric.gradle.plugin.opencms.OpenCmsResourceType
 import de.codecentric.gradle.plugin.opencms.files.*
 import groovy.xml.MarkupBuilder
 import org.gradle.api.DefaultTask
@@ -22,6 +23,7 @@ class CmsScaffoldTask extends DefaultTask {
                 createVfsDirectories(module)
                 createConfigFiles(module)
                 createFeatureFiles(module)
+                createResourceTypeFiles(module)
                 createResourceBundle(module)
             }
         }
@@ -47,6 +49,7 @@ class CmsScaffoldTask extends DefaultTask {
         createRootFolderMetaFiles(module);
         mkdir("${root}/elements")
         mkdir("${root}/formatters")
+        mkdir("${root}/lib")
         mkdir("${root}/resources")
         mkdir("${root}/schemas")
         mkdir("${root}/system")
@@ -112,7 +115,7 @@ class CmsScaffoldTask extends DefaultTask {
             feature ->
                 createFormatterJsp(feature)
                 createFormatterConfig(feature)
-                createFormatterSchema(feature)
+                createResourceTypeSchema(feature)
         }
     }
 
@@ -124,9 +127,17 @@ class CmsScaffoldTask extends DefaultTask {
         new OpenCmsFormatterConfig(feature, project, dir)
     }
 
-    def createFormatterSchema(OpenCmsFeature feature) {
-        new OpenCmsFormatterSchema(feature, project, dir)
+    def createResourceTypeSchema(OpenCmsResourceType resourceType) {
+        new OpenCmsResourceTypeSchema(resourceType, project, dir)
     }
+
+    def createResourceTypeFiles(OpenCmsModule module) {
+        module.resourceTypes.each() {
+            resourceType ->
+                createResourceTypeSchema(resourceType)
+        }
+    }
+
 
     def createResourceBundle(OpenCmsModule module) {
         new OpenCmsResourceBundle(module, project, dir)

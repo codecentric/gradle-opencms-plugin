@@ -11,8 +11,8 @@ import org.junit.Test
 import static org.junit.Assert.assertEquals
 import static org.junit.Assert.assertTrue
 
-public class OpenCmsFormatterSchemaTest {
-    OpenCmsFormatterSchema schema
+public class OpenCmsResourceTypeSchemaTest {
+    OpenCmsResourceTypeSchema schema
 
     FileSystemHelper helper;
     File tmpDir
@@ -31,7 +31,7 @@ public class OpenCmsFormatterSchemaTest {
                 type = "myFeature"
             }
         }
-        schema = new OpenCmsFormatterSchema(model.modules.get(0).features.get(0), this.project, tmpDir)
+        schema = new OpenCmsResourceTypeSchema(model.modules.get(0).features.get(0), this.project, tmpDir)
     }
 
     def createTempDir() {

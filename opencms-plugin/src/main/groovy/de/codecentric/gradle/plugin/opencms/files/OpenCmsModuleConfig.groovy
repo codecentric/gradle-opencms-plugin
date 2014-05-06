@@ -1,6 +1,7 @@
 package de.codecentric.gradle.plugin.opencms.files
 
 import de.codecentric.gradle.plugin.opencms.OpenCmsModule
+import de.codecentric.gradle.plugin.opencms.OpenCmsModuleProperty
 import org.gradle.api.Project
 
 
@@ -47,8 +48,9 @@ class OpenCmsModuleConfig extends OpenCmsVfsFile {
                 'xsi:noNamespaceSchemaLocation': "opencms://system/modules/org.opencms.ade" +
                         ".config/schemas/module_config.xsd") {
             ["en", "de"].each() { lang ->
-                module.features.each() { feature ->
-                    ModuleConfiguration(language: lang) {
+                int widgetCount = Integer.valueOf(module.cms.widgetOffset);
+                ModuleConfiguration(language: lang) {
+                    module.features.each() { feature ->
                         ResourceType() {
                             TypeName() {
                                 cdata("${feature.name}")
@@ -66,6 +68,29 @@ class OpenCmsModuleConfig extends OpenCmsVfsFile {
                             }
                         }
                     }
+                    module.properties.each() { OpenCmsModuleProperty property ->
+                        Property() {
+                            PropertyName() {
+                                cdata("${property.key}")
+                            }
+                            DisplayName() {
+                                cdata("${property.name}")
+                            }
+                            Widget() {
+                                cdata("${property.widget}")
+                            }
+                            Default() {
+                                cdata("${property.defaultValue}")
+                            }
+                            WidgetConfig() {
+                                cdata("${property.widgetConfig}")
+                            }
+                            Order() {
+                                cdata(++widgetCount + '')
+                            }
+                        }
+                    }
+
                 }
             }
         }

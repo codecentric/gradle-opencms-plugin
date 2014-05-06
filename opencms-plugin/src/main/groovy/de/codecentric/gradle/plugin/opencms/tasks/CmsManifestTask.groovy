@@ -1,6 +1,8 @@
 package de.codecentric.gradle.plugin.opencms.tasks
 
 import de.codecentric.gradle.plugin.opencms.OpenCmsModel
+import de.codecentric.gradle.plugin.opencms.OpenCmsModule
+import de.codecentric.gradle.plugin.opencms.OpenCmsResourceType
 import groovy.xml.MarkupBuilder
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.ConfigurableFileTree
@@ -10,6 +12,7 @@ import org.gradle.api.tasks.TaskAction
 class CmsManifestTask extends DefaultTask {
     File dir
     OpenCmsModel cms
+    int resourceCount
 
     def suffixToResourceType = [
             'jsp'   : 'jsp',
@@ -48,7 +51,10 @@ class CmsManifestTask extends DefaultTask {
                     xml.name(cmsmodule.name)
                     xml.nicename() { cdata(xml, cmsmodule.nicename) }
                     xml.group(cmsmodule.group)
-                    xml.class()
+                    if (cmsmodule.actionClass != "")
+                        xml.class(cmsmodule.actionClass)
+                    else
+                        xml.class()
                     xml.description() { cdata(xml, cmsmodule.description) }
                     xml.version(cmsmodule.version)
                     xml.authorname() { cdata(xml, cmsmodule.author) }
@@ -68,54 +74,82 @@ class CmsManifestTask extends DefaultTask {
                         }
                     }
                     xml.parameters()
+                    resourceCount = cmsmodule.cms.adeOffset.toInteger()
                     xml.resourcetypes() {
-                        cmsmodule.features.each() { feature ->
-                            type(class: "org.opencms.file.types.CmsResourceTypeXmlContent", name: "${feature.name}",
-                                    id: "" + (2000 + cmsmodule.features.indexOf(feature))) {
-                                param(name: "schema", "/system/modules/${cmsmodule.name}/schemas/${feature.name}.xsd")
-                            }
+                        cmsmodule.features.eachWithIndex() { feature, i ->
+                            resourceType(xml, feature, i)
+                        }
+                        cmsmodule.resourceTypes.eachWithIndex() { resource, i ->
+                            resourceType(xml, resource, i)
                         }
                     }
                     xml.explorertypes() {
-                        cmsmodule.features.each() { feature ->
-                            explorertype(name: "${feature.name}", key: "fileicon.${feature.name}",
-                                    icon: "xmlcontent.gif",
-                                    bigicon: "xmlcontent.gif", reference: "xmlcontent") {
-                                newresource(page: "structurecontent", uri: "newresource_xmlcontent.jsp?newresourcetype=" +
-                                        "${feature.name}", order: "" + (50 + cmsmodule.features.indexOf(feature)), autosetnavigation: "false",
-                                        autosettitle: "false", info: "desc.${feature.name}")
-                                accesscontrol() {
-                                    accessentry(principal: "ROLE.WORKPLACE_USER", permissions: "+r+v+w+c")
-                                }
-                            }
+                        cmsmodule.features.eachWithIndex() { feature, i ->
+                            explorerType(xml, feature, i);
+                        }
+                        cmsmodule.resourceTypes.eachWithIndex() { resource, i ->
+                            explorerType(xml, resource, i);
                         }
                     }
                 }
                 files() {
                     xml.mkp.yieldUnescaped "\n<!-- OpenCms VFS files -->"
-                    String user = cmsmodule.cms.username
                     ConfigurableFileTree vfsFiles = project.fileTree(dir: "${dir.absolutePath}/src/vfs",
                             excludes: ["**/*.meta.xml"])
                     vfsFiles.visit { DefaultFileVisitDetails vfsFile ->
-                        String relativePath = "${vfsFile.path}"
-                        relativePath = relativePath.endsWith("module.config") ? relativePath.substring(0,
-                                relativePath.lastIndexOf("module.config")) + ".config" : relativePath
-                        File meta = project.file(vfsFile.file.absolutePath + ".meta.xml")
-                        if (meta.exists()) {
-                            writer.append("\n" + meta.text)
-                        } else {
-                            String resourceType = getOpenCmsResourceType(vfsFile.file)
-                            String structureId = UUID.randomUUID()
-                            String resourceId = UUID.randomUUID()
-                            String modified = now()
-                            fileNode(xml, relativePath, resourceType, structureId, resourceId, modified, user)
-                        }
+                        insertFileBlock(xml, writer, cmsmodule, vfsFile)
+                    }
+
+                    ConfigurableFileTree libFiles = project.fileTree(dir: "${dir.absolutePath}/build/" +
+                            "opencms-cmsmodule", includes: ["**/system/modules/${cmsmodule.name}/lib/*.jar"])
+                    libFiles.visit { DefaultFileVisitDetails vfsFile ->
+                        if (!vfsFile.file.isDirectory())
+                            insertFileBlock(xml, writer, cmsmodule, vfsFile)
                     }
                 }
             }
             manifestFile.parentFile.mkdirs()
             manifestFile.createNewFile()
             manifestFile.text = '<?xml version="1.0" encoding="UTF-8"?>\n' + writer.toString()
+        }
+    }
+
+    def void insertFileBlock(MarkupBuilder xml, StringWriter writer, OpenCmsModule cmsmodule,
+                             DefaultFileVisitDetails vfsFile) {
+        String user = cmsmodule.cms.username
+        String relativePath = "${vfsFile.path}"
+        relativePath = relativePath.endsWith("module.config") ? relativePath.substring(0,
+                relativePath.lastIndexOf("module.config")) + ".config" : relativePath
+        File meta = project.file(vfsFile.file.absolutePath + ".meta.xml")
+        if (meta.exists()) {
+            writer.append("\n" + meta.text)
+        } else {
+            String resourceType = getOpenCmsResourceTypeString(vfsFile.file)
+            String structureId = UUID.randomUUID()
+            String resourceId = UUID.randomUUID()
+            String modified = now()
+            fileNode(xml, relativePath, resourceType, structureId, resourceId, modified, user)
+        }
+    }
+
+    def static void resourceType(MarkupBuilder xml, OpenCmsResourceType resourceType, int i) {
+        xml.type(class: "org.opencms.file.types.CmsResourceTypeXmlContent", name: "${resourceType.name}",
+                id: "${resourceType.id}") {
+            param(name: "schema", "/system/modules/${resourceType.module.name}/schemas/${resourceType.name}.xsd")
+        }
+    }
+
+    def void explorerType(MarkupBuilder xml, OpenCmsResourceType resourceType, int i) {
+        xml.explorertype(name: "${resourceType.name}", key: "fileicon.${resourceType.name}",
+                icon: "xmlcontent.gif",
+                bigicon: "xmlcontent.gif", reference: "xmlcontent") {
+            newresource(page: "structurecontent", uri: "newresource_xmlcontent.jsp?newresourcetype=" +
+                    "${resourceType.name}", order: "" + (++resourceCount),
+                    autosetnavigation: "false",
+                    autosettitle: "false", info: "desc.${resourceType.name}")
+            accesscontrol() {
+                accessentry(principal: "ROLE.WORKPLACE_USER", permissions: "+r+v+w+c")
+            }
         }
     }
 
@@ -150,7 +184,7 @@ class CmsManifestTask extends DefaultTask {
     }
 
 
-    def getOpenCmsResourceType(File file) {
+    def getOpenCmsResourceTypeString(File file) {
         if (file.directory) {
             return "folder"
         } else {

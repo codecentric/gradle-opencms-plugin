@@ -53,7 +53,7 @@ public class OpenCmsFormatterConfigTest {
                 "        <uuid></uuid>\n" +
                 "      </link>\n" +
                 "    </Jsp>\n" +
-                "    <Rank><![CDATA[1000]]></Rank>\n" +
+                "    <Rank><![CDATA[5000]]></Rank>\n" +
                 "    <Match>\n" +
                 "      <Types>\n" +
                 "        <ContainerType><![CDATA[content]]></ContainerType>\n" +
@@ -73,7 +73,7 @@ public class OpenCmsFormatterConfigTest {
                 "        <uuid></uuid>\n" +
                 "      </link>\n" +
                 "    </Jsp>\n" +
-                "    <Rank><![CDATA[1000]]></Rank>\n" +
+                "    <Rank><![CDATA[5000]]></Rank>\n" +
                 "    <Match>\n" +
                 "      <Types>\n" +
                 "        <ContainerType><![CDATA[content]]></ContainerType>\n" +

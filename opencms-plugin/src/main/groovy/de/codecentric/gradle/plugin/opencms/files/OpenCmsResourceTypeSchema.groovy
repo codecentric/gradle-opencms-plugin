@@ -1,23 +1,23 @@
 package de.codecentric.gradle.plugin.opencms.files
 
-import de.codecentric.gradle.plugin.opencms.OpenCmsFeature
+import de.codecentric.gradle.plugin.opencms.OpenCmsResourceType
 import org.gradle.api.Project
 
-class OpenCmsFormatterSchema extends OpenCmsVfsFile {
-    OpenCmsFormatterSchema(OpenCmsFeature feature, Project project, File dir) {
+class OpenCmsResourceTypeSchema extends OpenCmsVfsFile {
+    OpenCmsResourceTypeSchema(OpenCmsResourceType resourceType, Project project, File dir) {
         builder.doubleQuotes = true
         this.project = project
-        this.feature = feature
-        this.rootPath = "${dir.absolutePath}/src/vfs/system/modules/${feature.module.name}"
+        this.resourceType = resourceType
+        this.rootPath = "${dir.absolutePath}/src/vfs/system/modules/${resourceType.module.name}"
 
-        createFile(project, dir, feature)
+        createFile(project, dir, resourceType)
 
-        meta = project.file("${rootPath}/schemas/${feature.name}.xsd.meta.xml")
-        createMetadata("plain", "system/modules/${feature.module.name}/schemas/${feature.name}.xsd")
+        meta = project.file("${rootPath}/schemas/${resourceType.name}.xsd.meta.xml")
+        createMetadata("plain", "system/modules/${resourceType.module.name}/schemas/${resourceType.name}.xsd")
     }
 
-    def void createFile(Project project, File dir, OpenCmsFeature feature) {
-        file = project.file("${rootPath}/schemas/${feature.name}.xsd")
+    def void createFile(Project project, File dir, OpenCmsResourceType resourceType) {
+        file = project.file("${rootPath}/schemas/${resourceType.name}.xsd")
         if (!file.exists()) {
             prepareConfig()
             writeConfig()
@@ -26,7 +26,7 @@ class OpenCmsFormatterSchema extends OpenCmsVfsFile {
     }
 
     def prepareConfig() {
-        String name = toFirstUpper(feature.name)
+        String name = toFirstUpper(resourceType.name)
         builder.'xsd:schema'('xmlns:xsd': 'http://www.w3.org/2001/XMLSchema', 'elementFormDefault': 'qualified') {
             'xsd:include'('schemaLocation': 'opencms://opencms-xmlcontent.xsd')
             'xsd:element'(name: "${name}s", type: "OpenCms${name}s")
@@ -43,7 +43,7 @@ class OpenCmsFormatterSchema extends OpenCmsVfsFile {
             }
             'xsd:annotation'() {
                 'xsd:appinfo'() {
-                    resourcebundle(name: "${feature.module.name}.workplace")
+                    resourcebundle(name: "${resourceType.module.name}.workplace")
                 }
             }
         }
