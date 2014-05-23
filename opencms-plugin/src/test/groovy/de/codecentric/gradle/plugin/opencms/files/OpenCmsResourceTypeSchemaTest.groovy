@@ -23,9 +23,11 @@ public class OpenCmsResourceTypeSchemaTest {
         project = ProjectBuilder.builder().build()
         createTempDir()
         OpenCmsModel model = new OpenCmsModel(this.project);
+        model.explorerOffset = 0
         model.module {
             name = "feature.test"
             feature {
+                id = "1"
                 name = "myFeature"
                 nicename = "A brilliant test feature!"
                 type = "myFeature"

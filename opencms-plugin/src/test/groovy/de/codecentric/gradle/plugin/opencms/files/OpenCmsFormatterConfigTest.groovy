@@ -23,9 +23,11 @@ public class OpenCmsFormatterConfigTest {
         project = ProjectBuilder.builder().build()
         createTempDir()
         OpenCmsModel model = new OpenCmsModel(this.project);
+        model.explorerOffset = 5000
         model.module {
             name = "feature.test"
             feature {
+                id = "5001"
                 name = "myFeature"
                 nicename = "A brilliant test feature!"
                 type = "myFeature"
@@ -42,6 +44,7 @@ public class OpenCmsFormatterConfigTest {
     @Test
     public void shouldCreateFeatureConfig() {
         File file = project.file("${tmpDir.absolutePath}/src/vfs/system/modules/feature.test/formatters/myFeature.xml")
+        println file.text
         assertEquals("<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n" +
                 "<NewFormatters xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"opencms://system/modules/org.opencms.ade.config/schemas/formatters/new_formatter.xsd\">\n" +
                 "  <NewFormatter language=\"en\">\n" +

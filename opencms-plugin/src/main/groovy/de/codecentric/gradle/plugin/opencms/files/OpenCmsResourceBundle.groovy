@@ -61,6 +61,20 @@ class OpenCmsResourceBundle extends OpenCmsVfsFile {
                             Value() { cdata("${feature.description}") }
                         }
                     }
+                    module.resourceTypes.each() { resourceType ->
+                        Message() {
+                            Key() { cdata("fileicon.${resourceType.name}") }
+                            Value() { cdata("${resourceType.listname}") }
+                        }
+                        Message() {
+                            Key() { cdata("title.${resourceType.name}") }
+                            Value() { cdata("${resourceType.nicename}") }
+                        }
+                        Message() {
+                            Key() { cdata("desc.${resourceType.name}") }
+                            Value() { cdata("${resourceType.description}") }
+                        }
+                    }
                 }
             }
         }

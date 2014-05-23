@@ -8,6 +8,10 @@ class OpenCmsResourceType {
     OpenCmsModule module
     Project project
     String name
+    String nicename
+    String type
+    String description
+    String listname
 
     OpenCmsResourceType(final OpenCmsModule module, final Project project) {
         this.module = module

@@ -4,7 +4,6 @@ import de.codecentric.gradle.plugin.opencms.OpenCmsModule
 import de.codecentric.gradle.plugin.opencms.OpenCmsModuleProperty
 import org.gradle.api.Project
 
-
 class OpenCmsModuleConfig extends OpenCmsVfsFile {
 
     private OpenCmsModule module

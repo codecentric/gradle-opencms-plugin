@@ -24,6 +24,7 @@ public class CmsScaffoldTaskTest {
             username = "Admin"
             password = "admin"
             cmsProject = "Offline"
+            explorerOffset = 0
 
             module {
                 name = "cms-test"
@@ -34,6 +35,7 @@ public class CmsScaffoldTaskTest {
                 email = "tobias.goeschel@codecentric.de"
 
                 feature {
+                    id = "1"
                     name = "myFeature"
                 }
             }

@@ -15,24 +15,30 @@ public class OpenCmsModuleTest {
     public void setUp() {
         Project project = ProjectBuilder.builder().build()
         OpenCmsModel model = new OpenCmsModel(project)
+        model.explorerOffset = 0
         module = new OpenCmsModule(model, project)
     }
 
     @Test
     public void shouldConfigureFeatureFromClosure() {
+
         module.feature {
+            id = "1"
             name = "something"
         }
         assertEquals(1, module.features.size())
+        assertEquals("1", module.features.get(0).id)
         assertEquals("something", module.features.get(0).name)
     }
 
     @Test
     public void shouldConfigureResourceTypeFromClosure() {
         module.resourcetype {
+            id = "2"
             name = "something"
         }
         assertEquals(1, module.resourceTypes.size())
+        assertEquals("2", module.resourceTypes.get(0).id)
         assertEquals("something", module.resourceTypes.get(0).name)
     }
 

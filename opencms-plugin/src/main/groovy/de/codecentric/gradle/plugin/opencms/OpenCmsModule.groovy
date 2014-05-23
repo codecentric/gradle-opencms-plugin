@@ -4,7 +4,6 @@ import org.gradle.api.Project
 
 import javax.naming.ConfigurationException
 
-
 class OpenCmsModule {
     OpenCmsModel cms
     Project project
@@ -56,11 +55,18 @@ class OpenCmsModule {
             throw new ConfigurationException("ResourceType '${resourceType.name}' has specified an id below " +
                     "its required explorerOffset.");
 
-        cms.modules.resourceTypes.flatten().each() { OpenCmsResourceType res ->
-            verifyResourceIdsNotSame(res, resourceType)
+        List<OpenCmsModel> opencmslist = new ArrayList<>()
+        project.rootProject.subprojects.extensions.flatten().each() {
+            OpenCmsModel opencms = (OpenCmsModel) it.findByName('opencms')
+            if (opencms != null)
+                opencmslist.add(opencms)
         }
-        cms.modules.features.flatten().each() { OpenCmsResourceType res ->
-            verifyResourceIdsNotSame(res, resourceType)
+
+        opencmslist.modules.resourceTypes.flatten().each() {
+            verifyResourceIdsNotSame(it, resourceType)
+        }
+        opencmslist.modules.features.flatten().each() {
+            verifyResourceIdsNotSame(it, resourceType)
         }
     }
 
