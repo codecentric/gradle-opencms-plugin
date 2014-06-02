@@ -1,8 +1,0 @@
-loginUser opencms.user opencms.password
-setSiteRoot "opencms.site.root"
-setCurrentProject "opencms.project"
-importResources "opencms.import.datei" "opencms.ziel.folder"
-publishProjectAndWait
-purgeJSPRepository
-clearCaches
-exit
