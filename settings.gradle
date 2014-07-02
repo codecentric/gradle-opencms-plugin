@@ -1,1 +1,1 @@
-include 'opencms-plugin', 'xtext-dsl-plugin'
+include 'opencms-plugin'
