@@ -1,3 +1,0 @@
-loginUser opencms.user opencms.password
-exportModule opencms.module.name
-exit

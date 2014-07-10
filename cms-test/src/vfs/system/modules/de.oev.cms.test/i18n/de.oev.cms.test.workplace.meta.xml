@@ -1,0 +1,15 @@
+<file>
+  <source>system/modules/de.oev.cms.test/i18n/de.oev.cms.test.workplace</source>
+  <destination>system/modules/de.oev.cms.test/i18n/de.oev.cms.test.workplace</destination>
+  <type>xmlvfsbundle</type>
+  <uuidstructure>c6c37a97-b870-447b-ae5a-83cf790f5a86</uuidstructure>
+  <uuidresource>a21dbb06-71f9-4cc4-9852-b5727db6a7ab</uuidresource>
+  <datelastmodified>Mon, 7 Apr 2014 16:28:13 CEST</datelastmodified>
+  <userlastmodified>Admin</userlastmodified>
+  <datecreated>Mon, 7 Apr 2014 16:28:13 CEST</datecreated>
+  <usercreated>Admin</usercreated>
+  <flags>0</flags>
+  <properties />
+  <relations />
+  <accesscontrol />
+</file>

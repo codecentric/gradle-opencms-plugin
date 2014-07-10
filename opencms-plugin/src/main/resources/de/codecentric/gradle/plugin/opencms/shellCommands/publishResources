@@ -1,6 +1,0 @@
-loginUser opencms.user opencms.password
-setCurrentProject "opencms.project"
-publishProjectAndWait
-clearCaches
-### purgeJSPRepository
-exit

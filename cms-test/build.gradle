@@ -1,0 +1,82 @@
+apply plugin: 'java';
+apply plugin: 'opencms';
+apply plugin: 'rebel';
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        mavenRepo(
+                name: 'zt-public-snapshots',
+                url: 'http://repos.zeroturnaround.com/nexus/content/groups/zt-public/'
+        )
+        maven {
+            url = 'https://artifactory.codecentric.de/artifactory/internal'
+            credentials {
+                username artifactory_user
+                password artifactory_password
+            }
+        }
+
+        maven {
+            url = 'https://artifactory.codecentric.de/artifactory/snapshots'
+            credentials {
+                username artifactory_user
+                password artifactory_password
+            }
+        }
+    }
+
+    dependencies {
+        classpath 'de.codecentric:opencms-plugin:2.0-SNAPSHOT'
+        classpath group: 'org.zeroturnaround', name: 'gradle-jrebel-plugin', version: '1.1.2'
+        localGroovy()
+    }
+}
+
+cms_jar.dependsOn(generateRebel)
+cms_jar.from("${project.projectDir}/build/classes/rebel.xml")
+
+rebel {
+    showGenerated = true
+    rebelXmlDirectory = "build/classes"
+}
+
+opencms {
+    webInf = "${project.opencms_dir}/WEB-INF"
+    username = "Admin"
+    password = "admin"
+    cmsProject = "Offline"
+    cmsVersion = "9.0.1"
+    module {
+        name = "de.oev.cms.test"
+        group = "codecentric"
+        nicename = "OpenCms Testprojekt"
+        description = "A project to demonstrate usage of the OpenCms plugin."
+        author = "Codecentric AG"
+        email = "oevdigital@codecentric.de"
+        version = "0.0.1"
+        actionClass = ""
+        feature {
+            type = "myFeature"
+            name = "myFeature"
+            nicename = "Brilliant Testfeature"
+            listname = "Default myFeature Formatter"
+            description = "A brilliant test feature!"
+        }
+        feature {
+            type = "mySecondFeature"
+            name = "mySecondFeature"
+            nicename = "Another Brilliant Testfeature"
+            listname = "Default mySecondFeature Formatter"
+            description = "Another brilliant test feature!"
+        }
+        resourcetype {
+            name = "myResourceType"
+        }
+        exportpoint(uri: 'lib/', destination: 'WEB-INF/lib/')
+        exportpoint(uri: 'classes/', destination: 'WEB-INF/classes/')
+        exportpoint(uri: 'system/', destination: 'WEB-INF/')
+        resource(uri: '')
+    }
+}

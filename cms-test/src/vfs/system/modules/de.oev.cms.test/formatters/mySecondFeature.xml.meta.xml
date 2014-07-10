@@ -1,0 +1,20 @@
+<file>
+  <source>system/modules/de.oev.cms.test/formatters/mySecondFeature.xml</source>
+  <destination>system/modules/de.oev.cms.test/formatters/mySecondFeature.xml</destination>
+  <type>formatter_config</type>
+  <uuidstructure>0e90738f-5dd0-40d8-938e-40e779a002e7</uuidstructure>
+  <uuidresource>30b443bc-e980-43e4-ab2c-509f2f80955d</uuidresource>
+  <datelastmodified>Mon, 7 Apr 2014 16:28:13 CEST</datelastmodified>
+  <userlastmodified>Admin</userlastmodified>
+  <datecreated>Mon, 7 Apr 2014 16:28:13 CEST</datecreated>
+  <usercreated>Admin</usercreated>
+  <flags>0</flags>
+  <properties>
+    <property>
+      <name>Title</name>
+      <value><![CDATA[Another Brilliant Testfeature]]></value>
+    </property>
+  </properties>
+  <relations />
+  <accesscontrol />
+</file>

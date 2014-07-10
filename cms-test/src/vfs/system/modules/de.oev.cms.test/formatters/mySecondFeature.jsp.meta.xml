@@ -1,0 +1,20 @@
+<file>
+  <source>system/modules/de.oev.cms.test/formatters/mySecondFeature.jsp</source>
+  <destination>system/modules/de.oev.cms.test/formatters/mySecondFeature.jsp</destination>
+  <type>jsp</type>
+  <uuidstructure>77000563-1f92-45ad-ad9b-0c96f39e7c7a</uuidstructure>
+  <uuidresource>6401b7a9-daab-4cde-96d7-a7d691a1beb6</uuidresource>
+  <datelastmodified>Mon, 7 Apr 2014 16:28:13 CEST</datelastmodified>
+  <userlastmodified>Admin</userlastmodified>
+  <datecreated>Mon, 7 Apr 2014 16:28:13 CEST</datecreated>
+  <usercreated>Admin</usercreated>
+  <flags>0</flags>
+  <properties>
+    <property type="shared">
+      <name>export</name>
+      <value><![CDATA[false]]></value>
+    </property>
+  </properties>
+  <relations />
+  <accesscontrol />
+</file>
