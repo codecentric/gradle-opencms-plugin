@@ -1,0 +1,15 @@
+<file>
+  <source>system/modules/de.oev.cms.test/schemas/myResourceType.xsd</source>
+  <destination>system/modules/de.oev.cms.test/schemas/myResourceType.xsd</destination>
+  <type>plain</type>
+  <uuidstructure>c0e395e4-8a05-4b12-be36-d3f6f0b61a15</uuidstructure>
+  <uuidresource>dd68e260-77da-4368-b3f9-75dd59de0bfe</uuidresource>
+  <datelastmodified>Tue, 8 Apr 2014 14:08:02 CEST</datelastmodified>
+  <userlastmodified>Admin</userlastmodified>
+  <datecreated>Tue, 8 Apr 2014 14:08:02 CEST</datecreated>
+  <usercreated>Admin</usercreated>
+  <flags>0</flags>
+  <properties />
+  <relations />
+  <accesscontrol />
+</file>

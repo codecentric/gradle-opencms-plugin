@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:include schemaLocation="opencms://opencms-xmlcontent.xsd" />
+  <xsd:element name="MyFeatures" type="OpenCmsMyFeatures" />
+  <xsd:complexType name="OpenCmsMyFeatures">
+    <xsd:sequence>
+      <xsd:element name="MyFeature" type="OpenCmsMyFeature" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="OpenCmsMyFeature">
+    <xsd:sequence>
+      <xsd:element name="title" type="OpenCmsString" />
+    </xsd:sequence>
+    <xsd:attribute name="language" type="OpenCmsLocale" use="optional" />
+  </xsd:complexType>
+  <xsd:annotation>
+    <xsd:appinfo>
+      <resourcebundle name="de.oev.cms.test.workplace" />
+    </xsd:appinfo>
+  </xsd:annotation>
+</xsd:schema>

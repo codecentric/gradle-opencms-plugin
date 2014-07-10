@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<NewFormatters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="opencms://system/modules/org.opencms.ade.config/schemas/formatters/new_formatter.xsd">
+  <NewFormatter language="en">
+    <NiceName><![CDATA[Brilliant Testfeature]]></NiceName>
+    <Type><![CDATA[myFeature]]></Type>
+    <Jsp>
+      <link type="WEAK">
+        <target><![CDATA[/system/modules/de.oev.cms.test/formatters/myFeature.jsp]]></target>
+        <uuid>db75aeee-ac20-4aed-b314-a4f3ff126950</uuid>
+      </link>
+    </Jsp>
+    <Rank><![CDATA[5000]]></Rank>
+    <Match>
+      <Types>
+        <ContainerType><![CDATA[content]]></ContainerType>
+      </Types>
+    </Match>
+    <Preview>true</Preview>
+    <SearchContent>true</SearchContent>
+    <AutoEnabled>true</AutoEnabled>
+    <Detail>true</Detail>
+  </NewFormatter>
+  <NewFormatter language="de">
+    <NiceName><![CDATA[Brilliant Testfeature]]></NiceName>
+    <Type><![CDATA[myFeature]]></Type>
+    <Jsp>
+      <link type="WEAK">
+        <target><![CDATA[/system/modules/de.oev.cms.test/formatters/myFeature.jsp]]></target>
+        <uuid>587e043f-795e-434c-9511-4b3ef27da088</uuid>
+      </link>
+    </Jsp>
+    <Rank><![CDATA[5000]]></Rank>
+    <Match>
+      <Types>
+        <ContainerType><![CDATA[content]]></ContainerType>
+      </Types>
+    </Match>
+    <Preview>true</Preview>
+    <SearchContent>true</SearchContent>
+    <AutoEnabled>true</AutoEnabled>
+    <Detail>true</Detail>
+  </NewFormatter>
+</NewFormatters>

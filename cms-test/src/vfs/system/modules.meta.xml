@@ -1,0 +1,22 @@
+<file>
+  <destination>system/modules</destination>
+  <type>folder</type>
+  <uuidstructure>2201971a-789e-41e5-9a56-cdc009192333</uuidstructure>
+  <datelastmodified>Mon, 7 Apr 2014 16:28:13 CEST</datelastmodified>
+  <userlastmodified>Admin</userlastmodified>
+  <datecreated>Mon, 7 Apr 2014 16:28:13 CEST</datecreated>
+  <usercreated>Admin</usercreated>
+  <flags>0</flags>
+  <properties />
+  <relations />
+  <accesscontrol>
+    <accessentry>
+      <uuidprincipal>ROLE.WORKPLACE_USER</uuidprincipal>
+      <flags>514</flags>
+      <permissionset>
+        <allowed>5</allowed>
+        <denied>0</denied>
+      </permissionset>
+    </accessentry>
+  </accesscontrol>
+</file>
