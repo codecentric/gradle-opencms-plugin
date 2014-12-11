@@ -163,7 +163,7 @@ class CmsManifestTask extends DefaultTask {
                     autosetnavigation: "false",
                     autosettitle: "false", info: "desc.${resourceType.name}")
             accesscontrol() {
-                accessentry(principal: "ROLE.WORKPLACE_USER", permissions: "+r+v+w+c")
+               	accessentry(principal: "${resourceType.principal}", permissions: "+r+v+w+c")
             }
         }
     }
