@@ -164,6 +164,7 @@ class CmsManifestTask extends DefaultTask {
                     autosettitle: "false", info: "desc.${resourceType.name}")
             accesscontrol() {
                	accessentry(principal: "${resourceType.principal}", permissions: "+r+v+w+c")
+		accessentry(principal: "ROLE.ADMINISTRATOR", permissions: "+r+v+w+c")
             }
         }
     }
