@@ -20,7 +20,7 @@
     <Type><![CDATA[myFeature]]></Type>
     <Jsp>
       <link type="WEAK">
-        <target><![CDATA[/system/modules/de.oev.cms.test/formatters/myFeature.jsp]]></target>
+        <target><![CDATA[/system/modules/de.codecentric.cms.test/formatters/myFeature.jsp]]></target>
         <uuid>db75aeee-ac20-4aed-b314-a4f3ff126950</uuid>
       </link>
     </Jsp>
@@ -40,7 +40,7 @@
     <Type><![CDATA[myFeature]]></Type>
     <Jsp>
       <link type="WEAK">
-        <target><![CDATA[/system/modules/de.oev.cms.test/formatters/myFeature.jsp]]></target>
+        <target><![CDATA[/system/modules/de.codecentric.cms.test/formatters/myFeature.jsp]]></target>
         <uuid>587e043f-795e-434c-9511-4b3ef27da088</uuid>
       </link>
     </Jsp>

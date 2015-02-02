@@ -64,12 +64,12 @@ opencms {
     cmsProject = "Offline"
     cmsVersion = "9.0.1"
     module {
-        name = "de.oev.cms.test"
+        name = "de.codecentric.cms.test"
         group = "codecentric"
         nicename = "OpenCms Testprojekt"
         description = "A project to demonstrate usage of the OpenCms plugin."
         author = "Codecentric AG"
-        email = "oevdigital@codecentric.de"
+        email = "test@codecentric.de"
         version = "0.0.1"
         actionClass = ""
         feature {

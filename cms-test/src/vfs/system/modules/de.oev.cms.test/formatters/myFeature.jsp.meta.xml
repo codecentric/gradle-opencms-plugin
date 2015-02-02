@@ -14,8 +14,8 @@
  limitations under the License.
 -->
 <file>
-  <source>system/modules/de.oev.cms.test/formatters/myFeature.jsp</source>
-  <destination>system/modules/de.oev.cms.test/formatters/myFeature.jsp</destination>
+  <source>system/modules/de.codecentric.cms.test/formatters/myFeature.jsp</source>
+  <destination>system/modules/de.codecentric.cms.test/formatters/myFeature.jsp</destination>
   <type>jsp</type>
   <uuidstructure>6172e608-bf7f-4efc-bc77-a966bff5708e</uuidstructure>
   <uuidresource>346b193b-0615-4ffc-b8c5-131a2c68a0cc</uuidresource>

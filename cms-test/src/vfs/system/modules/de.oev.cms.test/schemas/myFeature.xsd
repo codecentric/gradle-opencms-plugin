@@ -30,7 +30,7 @@
   </xsd:complexType>
   <xsd:annotation>
     <xsd:appinfo>
-      <resourcebundle name="de.oev.cms.test.workplace" />
+      <resourcebundle name="de.codecentric.cms.test.workplace" />
     </xsd:appinfo>
   </xsd:annotation>
 </xsd:schema>

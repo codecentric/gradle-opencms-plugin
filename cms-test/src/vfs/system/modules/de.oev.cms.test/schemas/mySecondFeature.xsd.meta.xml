@@ -14,8 +14,8 @@
  limitations under the License.
 -->
 <file>
-  <source>system/modules/de.oev.cms.test/schemas/mySecondFeature.xsd</source>
-  <destination>system/modules/de.oev.cms.test/schemas/mySecondFeature.xsd</destination>
+  <source>system/modules/de.codecentric.cms.test/schemas/mySecondFeature.xsd</source>
+  <destination>system/modules/de.codecentric.cms.test/schemas/mySecondFeature.xsd</destination>
   <type>plain</type>
   <uuidstructure>af754926-ac47-4c51-9b33-881acd0ee316</uuidstructure>
   <uuidresource>422cff35-6dcd-4319-b33a-8d346a2245e6</uuidresource>

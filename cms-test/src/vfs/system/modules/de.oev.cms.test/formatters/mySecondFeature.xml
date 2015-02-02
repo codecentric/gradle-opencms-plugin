@@ -20,7 +20,7 @@
     <Type><![CDATA[mySecondFeature]]></Type>
     <Jsp>
       <link type="WEAK">
-        <target><![CDATA[/system/modules/de.oev.cms.test/formatters/mySecondFeature.jsp]]></target>
+        <target><![CDATA[/system/modules/de.codecentric.cms.test/formatters/mySecondFeature.jsp]]></target>
         <uuid>cacce686-a677-4bda-87a8-1b50ba83adf4</uuid>
       </link>
     </Jsp>
@@ -40,7 +40,7 @@
     <Type><![CDATA[mySecondFeature]]></Type>
     <Jsp>
       <link type="WEAK">
-        <target><![CDATA[/system/modules/de.oev.cms.test/formatters/mySecondFeature.jsp]]></target>
+        <target><![CDATA[/system/modules/de.codecentric.cms.test/formatters/mySecondFeature.jsp]]></target>
         <uuid>4a5c1906-7347-46ba-8702-29a1a4a4b8a3</uuid>
       </link>
     </Jsp>

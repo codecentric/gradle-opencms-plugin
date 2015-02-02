@@ -14,8 +14,8 @@
  limitations under the License.
 -->
 <file>
-  <source>system/modules/de.oev.cms.test/formatters/myFeature.xml</source>
-  <destination>system/modules/de.oev.cms.test/formatters/myFeature.xml</destination>
+  <source>system/modules/de.codecentric.cms.test/formatters/myFeature.xml</source>
+  <destination>system/modules/de.codecentric.cms.test/formatters/myFeature.xml</destination>
   <type>formatter_config</type>
   <uuidstructure>cdd27e8e-758a-4c62-a66d-b8f4648a3637</uuidstructure>
   <uuidresource>b04b0a07-1768-4600-ac16-cd78dbc88455</uuidresource>

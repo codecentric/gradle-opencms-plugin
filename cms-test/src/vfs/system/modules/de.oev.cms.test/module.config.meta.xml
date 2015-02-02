@@ -14,8 +14,8 @@
  limitations under the License.
 -->
 <file>
-  <source>system/modules/de.oev.cms.test/.config</source>
-  <destination>system/modules/de.oev.cms.test/.config</destination>
+  <source>system/modules/de.codecentric.cms.test/.config</source>
+  <destination>system/modules/de.codecentric.cms.test/.config</destination>
   <type>module_config</type>
   <uuidstructure>bb4da30f-86d6-44d4-bb9c-3c4730b6f9c7</uuidstructure>
   <uuidresource>785a6237-cc47-4313-a032-89f63c6fe7de</uuidresource>

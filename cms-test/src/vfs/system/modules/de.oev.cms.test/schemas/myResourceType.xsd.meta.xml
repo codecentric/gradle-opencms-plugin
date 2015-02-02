@@ -14,8 +14,8 @@
  limitations under the License.
 -->
 <file>
-  <source>system/modules/de.oev.cms.test/schemas/myResourceType.xsd</source>
-  <destination>system/modules/de.oev.cms.test/schemas/myResourceType.xsd</destination>
+  <source>system/modules/de.codecentric.cms.test/schemas/myResourceType.xsd</source>
+  <destination>system/modules/de.codecentric.cms.test/schemas/myResourceType.xsd</destination>
   <type>plain</type>
   <uuidstructure>c0e395e4-8a05-4b12-be36-d3f6f0b61a15</uuidstructure>
   <uuidresource>dd68e260-77da-4368-b3f9-75dd59de0bfe</uuidresource>
