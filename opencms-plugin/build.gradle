@@ -15,7 +15,7 @@
  */
 apply plugin: 'maven'
 
-version='2.0-SNAPSHOT'
+version='2.1-SNAPSHOT'
 group = 'de.codecentric'
 archivesBaseName = 'opencms-plugin'
 

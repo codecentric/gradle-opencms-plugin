@@ -125,7 +125,7 @@ class CmsManifestTask extends DefaultTask {
             }
             manifestFile.parentFile.mkdirs()
             manifestFile.createNewFile()
-            manifestFile.text = '<?xml version="1.0" encoding="UTF-8"?>\n' + writer.toString()
+            manifestFile.write('<?xml version="1.0" encoding="UTF-8"?>\n' + writer.toString(), 'UTF-8')
         }
     }
 
