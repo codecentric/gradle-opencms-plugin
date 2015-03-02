@@ -1,2 +1,2 @@
-userName=<user name for Artifactory>
-password=<password hash for Artifactory>
+userName=artifactoryUserName
+password=artifactoryPasswordHash
