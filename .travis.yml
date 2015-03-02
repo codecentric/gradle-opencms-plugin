@@ -4,4 +4,5 @@ jdk:
  - oraclejdk7
  - oraclejdk8
 
-before_script: cp gradle.properties.template gradle.properties
+# pass dummy authentication, otherwise the script evaluation will fail
+script: ./gradlew assemble -PuserName=travis -Ppassword=travis
