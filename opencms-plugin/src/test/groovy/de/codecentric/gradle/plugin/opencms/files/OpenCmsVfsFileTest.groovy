@@ -56,8 +56,9 @@ public class OpenCmsVfsFileTest {
     @Test
     public void shouldReturnFormattedDate() throws Exception {
         Locale.setDefault(Locale.ENGLISH)
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"))
         file.date = new Date(0)
-        assertEquals("Thu, 1 Jan 1970 01:00:00 CET", file.now())
+        assertEquals("Thu, 1 Jan 1970 00:00:00 UTC", file.now())
     }
 
     @Test
