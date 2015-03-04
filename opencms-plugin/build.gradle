@@ -15,8 +15,6 @@
  */
 apply plugin: 'maven'
 
-archivesBaseName = 'opencms-plugin'
-
 buildscript {
     repositories {
         mavenLocal()
