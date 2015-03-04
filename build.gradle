@@ -22,6 +22,8 @@ allprojects {
     apply plugin: 'groovy'
     apply plugin: 'idea'
     apply plugin: 'eclipse'
+    apply plugin: 'jacoco'
+    apply plugin: 'com.github.kt3k.coveralls'
 
     group 'de.codecentric.gradle'
     version = '0.0.1-SNAPSHOT'
@@ -39,6 +41,16 @@ allprojects {
         module {
             jdkName = '1.7'
         }
+    }
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.3.1'
     }
 }
 
@@ -74,5 +86,15 @@ subprojects {
     task integrationTest(type: Test) {
         testClassesDir = sourceSets.integrationTest.output.classesDir
         classpath = sourceSets.integrationTest.runtimeClasspath
+    }
+
+    jacocoTestReport {
+        reports {
+            xml.enabled = true
+        }
+    }
+
+    coveralls {
+        jacocoReportPath = "${project(':opencms-plugin').buildDir}/reports/jacoco/test/jacocoTestReport.xml"
     }
 }
