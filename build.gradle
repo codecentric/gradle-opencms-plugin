@@ -17,6 +17,9 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
 }
 
+group = 'de.codecentric'
+version = '2.1.1-SNAPSHOT'
+
 allprojects {
     apply plugin: 'java'
     apply plugin: 'groovy'
@@ -24,9 +27,7 @@ allprojects {
     apply plugin: 'eclipse'
     apply plugin: 'jacoco'
     apply plugin: 'com.github.kt3k.coveralls'
-
-    group 'de.codecentric.gradle'
-    version = '0.0.1-SNAPSHOT'
+    
 
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
