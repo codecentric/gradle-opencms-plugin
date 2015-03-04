@@ -16,7 +16,6 @@
 apply plugin: 'maven'
 
 dependencies {
-    compile fileTree(dir: 'lib', includes: ['*.jar'])
     compile gradleApi()
     compile localGroovy()
     compile 'javax.servlet:jsp-api:2.0'
