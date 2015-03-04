@@ -15,25 +15,7 @@
  */
 apply plugin: 'maven'
 
-version='2.1-SNAPSHOT'
-group = 'de.codecentric'
-archivesBaseName = 'opencms-plugin'
-
-buildscript {
-    repositories {
-        mavenLocal()
-        mavenCentral()
-    }
-    dependencies {
-        classpath fileTree(dir: "${project.projectDir}/lib")
-        classpath 'javax.servlet:jsp-api:2.0'
-        classpath 'javax.servlet:javax.servlet-api:3.0.1'
-    }
-}
-
-
 dependencies {
-    compile fileTree(dir: 'lib', includes: ['*.jar'])
     compile gradleApi()
     compile localGroovy()
     compile 'javax.servlet:jsp-api:2.0'
