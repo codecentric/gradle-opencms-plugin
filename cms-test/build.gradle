@@ -21,10 +21,10 @@ buildscript {
     repositories {
         mavenLocal()
         mavenCentral()
-        mavenRepo(
-                name: 'zt-public-snapshots',
-                url: 'http://repos.zeroturnaround.com/nexus/content/groups/zt-public/'
-        )
+        maven {
+            name: 'zt-public-snapshots'
+            url: 'http://repos.zeroturnaround.com/nexus/content/groups/zt-public/'
+        }
         maven {
             url = 'https://artifactory.codecentric.de/artifactory/internal'
             credentials {
