@@ -17,6 +17,7 @@ gradle-opencms-plugin
 =====================
 [![Build Status](https://travis-ci.org/codecentric/gradle-opencms-plugin.svg)](https://travis-ci.org/codecentric/gradle-opencms-plugin)
 [![Coverage Status](https://coveralls.io/repos/codecentric/gradle-opencms-plugin/badge.svg)](https://coveralls.io/r/codecentric/gradle-opencms-plugin)
+[![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 The gradle-opencms-plugin lets you build [OpenCMS](http://www.opencms.org/) modules using gradle.
 
