@@ -5,3 +5,5 @@ jdk:
  - oraclejdk8
 
 before_install: cp gradle.properties.template gradle.properties
+
+after_success: ./gradlew opencms-plugin:jacocoTestReport coveralls
