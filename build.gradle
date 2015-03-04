@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.12'
+    gradleVersion = '2.0'
 }
 
 allprojects {
@@ -36,9 +36,8 @@ allprojects {
     }
 
     idea {
-        project {
+        module {
             jdkName = '1.7'
-            languageLevel = '1.7'
         }
     }
 }
