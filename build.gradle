@@ -18,7 +18,7 @@ task wrapper(type: Wrapper) {
 }
 
 group = 'de.codecentric'
-version = '2.1.1-SNAPSHOT'
+version = '2.2'
 
 allprojects {
     apply plugin: 'java'
@@ -27,7 +27,7 @@ allprojects {
     apply plugin: 'eclipse'
     apply plugin: 'jacoco'
     apply plugin: 'com.github.kt3k.coveralls'
-    
+
 
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
