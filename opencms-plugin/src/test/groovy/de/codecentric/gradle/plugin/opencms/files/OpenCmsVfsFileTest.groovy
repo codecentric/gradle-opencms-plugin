@@ -83,4 +83,4 @@ public class OpenCmsVfsFileTest {
     public void tearDown() {
         file = null;
     }
-} 
+}

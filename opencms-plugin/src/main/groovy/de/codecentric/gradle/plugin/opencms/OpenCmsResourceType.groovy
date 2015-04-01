@@ -27,6 +27,7 @@ class OpenCmsResourceType {
     String type
     String description
     String listname
+    String principal = "ROLE.WORKPLACE_USER"
 
     OpenCmsResourceType(final OpenCmsModule module, final Project project) {
         this.module = module
