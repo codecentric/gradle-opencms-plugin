@@ -63,7 +63,7 @@ class OpenCmsPlugin implements Plugin<Project> {
             }
         }
 
-        project.task('cms_manifest', type: CmsManifestTask) {
+        project.task('cms_manifest', type: CmsManifestTask, dependsOn: 'cms_module') {
             project.plugins.withType(JavaPlugin) {
                 dependsOn 'cms_jar'
             }
