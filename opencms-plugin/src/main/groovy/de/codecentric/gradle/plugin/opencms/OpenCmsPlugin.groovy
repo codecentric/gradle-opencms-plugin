@@ -18,6 +18,7 @@ package de.codecentric.gradle.plugin.opencms
 import de.codecentric.gradle.plugin.opencms.tasks.*
 import groovy.util.logging.Slf4j
 import org.gradle.api.Plugin
+import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.Project
 
 @Slf4j
@@ -55,12 +56,18 @@ class OpenCmsPlugin implements Plugin<Project> {
             }
         }
 
-        project.task('cms_jar', type: CmsJarTask, dependsOn: 'cms_module') {
-            from project.sourceSets.main.output
-            cms openCms
+        project.plugins.withType(JavaPlugin) {
+            project.task('cms_jar', type: CmsJarTask, dependsOn: 'cms_module') {
+                from project.sourceSets.main.output
+                cms openCms
+            }
         }
 
-        project.task('cms_manifest', type: CmsManifestTask, dependsOn: 'cms_jar') {
+        project.task('cms_manifest', type: CmsManifestTask) {
+            project.plugins.withType(JavaPlugin) {
+                dependsOn 'cms_jar'
+            }
+
             description = "Creates the module's manifest.xml configuration file from the contents of the vfs folder."
             dir project.projectDir
             cms openCms
