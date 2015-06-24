@@ -26,7 +26,7 @@ allprojects {
     apply plugin: 'com.github.kt3k.coveralls'
 
     group = 'de.codecentric'
-    version = '2.5.2'
+    version = '2.6.0-SNAPSHOT'
 
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
