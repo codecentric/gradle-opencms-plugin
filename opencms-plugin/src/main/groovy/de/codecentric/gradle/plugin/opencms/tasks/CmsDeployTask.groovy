@@ -30,7 +30,7 @@ class CmsDeployTask extends Zip {
     @Override
     protected CopyAction createCopyAction() {
         OpenCmsModule module = cms.modules.get(0)
-        archiveName = module.name + "-" + module.version + ".zip"
+        archiveName = module.archiveName ?: "${module.name}-${module.version}.zip"
         duplicatesStrategy = DuplicatesStrategy.WARN
         includeEmptyDirs = true
         return new ZipCopyAction(getArchivePath(), getCompressor(), new DocumentationRegistry())

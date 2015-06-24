@@ -30,6 +30,7 @@ class OpenCmsModule {
     String email = ""
     String version = ""
     String actionClass = ""
+    String archiveName = ""
 
     List<OpenCmsFeature> features
     List<OpenCmsResourceType> resourceTypes
