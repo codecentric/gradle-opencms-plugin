@@ -27,10 +27,14 @@ class OpenCmsResourceType {
     String type
     String description
     String listname
-    String[] principal = ["ROLE.WORKPLACE_USER"]
+    def principal = "ROLE.WORKPLACE_USER"
 
     OpenCmsResourceType(final OpenCmsModule module, final Project project) {
         this.module = module
         this.project = project
+    }
+
+    void principal(String...principals) {
+        this.principal = principals
     }
 }
