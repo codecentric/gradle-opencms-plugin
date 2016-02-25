@@ -162,12 +162,24 @@ class CmsManifestTask extends DefaultTask {
                     "${resourceType.name}", order: "" + (++resourceCount),
                     autosetnavigation: "false",
                     autosettitle: "false", info: "desc.${resourceType.name}")
-            accesscontrol() {
-               	accessentry(principal: "${resourceType.principal}", permissions: "+r+v+w+c")
-		accessentry(principal: "ROLE.ADMINISTRATOR", permissions: "+r+v+w+c")
-            }
+            generatePrinciples(resourceType, xml)
         }
     }
+
+    static def void generatePrinciples(OpenCmsResourceType resourceType, MarkupBuilder xml) {
+        xml.accesscontrol() {
+            def principal = resourceType.principal
+            if (principal instanceof String[]){
+                for (int i = 0; i < principal.size(); i++) {
+                    accessentry(principal: "${principal[i]}", permissions: "+r+v+w+c")
+                }
+            } else {
+                accessentry(principal: "${principal}", permissions: "+r+v+w+c")
+            }
+            accessentry(principal: "ROLE.ADMINISTRATOR", permissions: "+r+v+w+c")
+        }
+    }
+
 
     def void fileNode(MarkupBuilder xml,
                       String path,
