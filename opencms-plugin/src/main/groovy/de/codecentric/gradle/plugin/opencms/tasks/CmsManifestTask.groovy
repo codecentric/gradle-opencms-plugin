@@ -168,14 +168,11 @@ class CmsManifestTask extends DefaultTask {
 
     static def void generatePrinciples(OpenCmsResourceType resourceType, MarkupBuilder xml) {
         xml.accesscontrol() {
-            def principal = resourceType.principal
-            if (principal instanceof String[]){
-                for (int i = 0; i < principal.size(); i++) {
-                    accessentry(principal: "${principal[i]}", permissions: "+r+v+w+c")
-                }
-            } else {
-                accessentry(principal: "${principal}", permissions: "+r+v+w+c")
+            if (!resourceType.principal.class.isArray()) {
+                resourceType.principal = [ resourceType.principal ]
             }
+
+            resourceType.principal.each{ e -> accessentry(principal: "${e}", permissions: "+r+v+w+c")}
             accessentry(principal: "ROLE.ADMINISTRATOR", permissions: "+r+v+w+c")
         }
     }

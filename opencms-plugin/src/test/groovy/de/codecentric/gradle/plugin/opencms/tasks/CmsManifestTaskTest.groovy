@@ -119,10 +119,10 @@ public class CmsManifestTaskTest {
         assertEquals(NEW_XML_WITH_MULTIPLE_PRINCIPALS, writer.toString());
     }
 
-    private OpenCmsResourceType generateResourceTypeWithPrincipals(String[] principals) {
+    private OpenCmsResourceType generateResourceTypeWithPrincipals(def principal) {
         OpenCmsResourceType resourceType = new OpenCmsResourceType(null, project)
-        if (null != principals) {
-            resourceType.principal = principals
+        if (null != principal) {
+            resourceType.principal = principal
         }
         return resourceType
     }
