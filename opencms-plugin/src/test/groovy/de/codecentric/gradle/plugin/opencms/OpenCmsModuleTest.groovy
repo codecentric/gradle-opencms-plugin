@@ -29,10 +29,17 @@ public class OpenCmsModuleTest {
     @Before
     public void setUp() {
         Project project = ProjectBuilder.builder().build()
+        project.version = "1.2.3"
+        
         OpenCmsModel model = new OpenCmsModel(project)
         model.explorerOffset = 0
         module = new OpenCmsModule(model, project)
     }
+
+	@Test
+	public void shouldUseProjectVersionByDefault() {
+		assertEquals("1.2.3", module.version)
+	}
 
     @Test
     public void shouldConfigureFeatureFromClosure() {

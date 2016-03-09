@@ -41,6 +41,8 @@ class OpenCmsModule {
 
     def OpenCmsModule(OpenCmsModel openCmsModel, Project project) {
         this.project = project
+        this.version = project.version
+        
         this.cms = openCmsModel
         features = new ArrayList<>()
         resourceTypes = new ArrayList<>();
