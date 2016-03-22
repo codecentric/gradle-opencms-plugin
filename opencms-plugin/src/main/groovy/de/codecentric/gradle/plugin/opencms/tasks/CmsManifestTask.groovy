@@ -97,6 +97,9 @@ class CmsManifestTask extends DefaultTask {
                         cmsmodule.resourceTypes.eachWithIndex() { resource, i ->
                             resourceType(xml, resource, i)
                         }
+                        cmsmodule.specialResourcetypes.eachWithIndex() { special, i ->
+                            explorerType(xml, special, i);
+                        }
                     }
                     xml.explorertypes() {
                         cmsmodule.features.eachWithIndex() { feature, i ->

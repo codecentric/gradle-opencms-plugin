@@ -82,6 +82,24 @@ class OpenCmsModuleConfig extends OpenCmsVfsFile {
                             }
                         }
                     }
+                    module.specialResourcetypes.each() { specialResourcetype ->
+                        ResourceType() {
+                            TypeName() {
+                                cdata("${specialResourcetype.name}")
+                            }
+                            Folder() {
+                                Name() {
+                                    cdata("${specialResourcetype.name}")
+                                }
+                            }
+                            NamePattern() {
+                                cdata("${specialResourcetype.name}_%(number).html")
+                            }
+                            Order() {
+                                cdata("${200 + module.specialResourcetypes.indexOf(specialResourcetype)}")
+                            }
+                        }
+                    }
                     module.properties.each() { OpenCmsModuleProperty property ->
                         Property() {
                             PropertyName() {
