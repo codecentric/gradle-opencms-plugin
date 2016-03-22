@@ -33,6 +33,7 @@ class OpenCmsModule {
     String archiveName = ""
 
     List<OpenCmsFeature> features
+    List<OpenCmsSpecialResourcetype> specialResourcetypes
     List<OpenCmsResourceType> resourceTypes
     List<OpenCmsModuleProperty> properties
 
@@ -43,6 +44,7 @@ class OpenCmsModule {
         this.project = project
         this.cms = openCmsModel
         features = new ArrayList<>()
+        specialResourcetypes = new ArrayList<>()
         resourceTypes = new ArrayList<>();
         properties = new ArrayList<>();
     }
@@ -54,6 +56,15 @@ class OpenCmsModule {
         closure.resolveStrategy = Closure.DELEGATE_FIRST
         closure()
         verifyResourceId(feature)
+    }
+    
+    def specialresourcetype(Closure closure) {
+        OpenCmsSpecialResourcetype specialResourcetype = new OpenCmsSpecialResourcetype(this, project)
+        specialResourcetypes.add(specialResourcetype)
+        closure.delegate = specialResourcetype
+        closure.resolveStrategy = Closure.DELEGATE_FIRST
+        closure()
+        verifyResourceId(specialResourcetype)
     }
 
     def resourcetype(Closure closure) {
@@ -79,6 +90,9 @@ class OpenCmsModule {
         }
 
         opencmslist.modules.resourceTypes.flatten().each() {
+            verifyResourceIdsNotSame(it, resourceType)
+        }
+        opencmslist.modules.specialResourcetypes.flatten().each() {
             verifyResourceIdsNotSame(it, resourceType)
         }
         opencmslist.modules.features.flatten().each() {
