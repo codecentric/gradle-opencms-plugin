@@ -98,7 +98,7 @@ class CmsManifestTask extends DefaultTask {
                             resourceType(xml, resource, i)
                         }
                         cmsmodule.specialResourcetypes.eachWithIndex() { special, i ->
-                            explorerType(xml, special, i);
+                            resourceType(xml, special, i);
                         }
                     }
                     xml.explorertypes() {
@@ -107,6 +107,9 @@ class CmsManifestTask extends DefaultTask {
                         }
                         cmsmodule.resourceTypes.eachWithIndex() { resource, i ->
                             explorerType(xml, resource, i);
+                        }
+                        cmsmodule.specialResourcetypes.eachWithIndex() { special, i ->
+                            explorerType(xml, special, i);
                         }
                     }
                 }

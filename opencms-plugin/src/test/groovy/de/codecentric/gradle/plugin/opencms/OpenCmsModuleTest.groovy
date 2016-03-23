@@ -56,6 +56,17 @@ public class OpenCmsModuleTest {
         assertEquals("2", module.resourceTypes.get(0).id)
         assertEquals("something", module.resourceTypes.get(0).name)
     }
+    
+    @Test
+    public void shouldConfigureSpecialResourceTypeFromClosure() {
+        module.specialresourcetype {
+            id = "3"
+            name = "something"
+        }
+        assertEquals(1, module.specialResourcetypes.size())
+        assertEquals("3", module.specialResourcetypes.get(0).id)
+        assertEquals("something", module.specialResourcetypes.get(0).name)
+    }
 
     @After
     public void tearDown() {
